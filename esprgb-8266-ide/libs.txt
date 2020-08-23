@@ -1,0 +1,5 @@
+WebSockets
+https://github.com/Links2004/arduinoWebSockets
+
+ArduinoJson
+https://github.com/bblanchon/ArduinoJson
