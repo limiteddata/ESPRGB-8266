@@ -1,8 +1,8 @@
 # ESPRGB-8266
 
-<center>
-  <img src="./assets/esprgb_banner.svg" width=300 />
-</center>
+
+<img align="center" src="./assets/esprgb_banner.svg" width=400 />
+
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; **ESPRGB** is a open-source platform that provides you with the easiest way to upgrade your rgb led strip to a fully-featured and customizable wifi rgb controller for cheap.
 
