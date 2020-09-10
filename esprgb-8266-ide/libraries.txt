@@ -1,0 +1,11 @@
+Installing ESP8266 Board in Arduino IDE:
+
+https://randomnerdtutorials.com/how-to-install-esp8266-board-arduino-ide/
+
+Libraries:
+
+WebSockets
+https://github.com/Links2004/arduinoWebSockets
+
+ArduinoJson
+https://github.com/bblanchon/ArduinoJson

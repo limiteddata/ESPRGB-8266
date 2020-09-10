@@ -60,7 +60,7 @@ const char configPage[] PROGMEM= R"=====(
                   <label style="display: inline-block; margin-left:15px; width:80px;" for="pins">Blue pin:</label>
                   <select class="inputStyle" style="display:inline-block;width:75px; height:20px; margin:5 auto;" id="BLUEPIN" name="BLUEPIN" onchange="disableOption()" required="">
                     <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option>
-                    <option value="12">12</option><option value="13">13</option><option value="14">14</option><option value="15">15</option><option value="16">16</option>
+                    <option value="12">12</option><option value="13">13</option><option value="14">14</option><option value="15">15</option>
                   </select>
                   <button style="display: inline-block; width:60px; height:20px; font-size:9pt; margin:5 auto;" class="btn" onclick="testPin(document.getElementById('BLUEPIN').value)" type="button">TEST</button>
                 </div>
@@ -252,7 +252,7 @@ const char homePage[] PROGMEM= R"=====(
             <input type="checkbox" id="startBreathing" oninput="if(this.checked) {selectAnimation('Breathing')} else{ selectAnimation('Solid Color')}">
             <div style="height: 25px;width: 378px; margin:4px auto;">
               <input type="checkbox" style="float:right; margin: 0px 4px;" id="useColorList" oninput="ws.send(JSON.stringify({'Animations':{'Breathing':{'useColorList':this.checked}}}));">
-              <p style="float:right; margin: 0px 4px;">useColorList</p>
+              <p style="float:right; margin: 0px 4px;">Use Color List</p>
               <p style="float:right; margin: 0px 4px;">Speed:<i id="breathingSpeed">1</i></p>
             </div>
               <div id="colorListResult" style="height: 25px;width: 370px; margin:4px auto; display: table; table-layout: fixed;"><div style="background-color:#152036; display: table-cell;"></div></div>
