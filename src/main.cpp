@@ -7,7 +7,7 @@
 #include <ArduinoJson.h>
 #include "FS.h"
 #include <SchedulerESP8266.h>
-#define ESPRGB_VERSION "1.1.0.0"
+#define ESPRGB_VERSION "1.1.0.1"
 #define reset_pin 16
 
 Scheduler scheduler;
