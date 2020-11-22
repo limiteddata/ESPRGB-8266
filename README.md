@@ -167,8 +167,6 @@ If you are having weird reboots is probably due to improper power to the esp, if
 
 If one or more leds don't turn on check the wiring especially the grounds, all the grounds need to be connected together, try to connect the mosfets without a resistor or check the continuity between the connection.
 
-If none the above worked for you email me at **limiteddata90@gmail.com**
-
 **Built in led flashing codes:**
 
 **Solid Blue** - the board it's in initialization stage
