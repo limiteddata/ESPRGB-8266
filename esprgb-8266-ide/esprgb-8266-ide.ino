@@ -7,7 +7,7 @@
 #include <ArduinoJson.h>
 #include "FS.h"
 #include <SchedulerESP8266.h>
-#define ESPRGB_VERSION "1.1.0.1"
+#define ESPRGB_VERSION "1.1.0.2"
 #define reset_pin 16
 
 Scheduler scheduler;
@@ -1193,7 +1193,7 @@ void setAnimation(String animation){
       }
     }
     
-    if (animation == "Solid Color") SetColorValue(configJson["Animations"]["parameters"]["SolidColor"]["Color"][0].as<int>(),configJson["Animations"]["parameters"]["SolidColor"]["Color"][1].as<int>(),configJson["Animations"]["parameters"]["SolidColor"]["Color"][2].as<int>(),configJson["Animations"]["parameters"]["SolidColor"]["Brightness"].as<int>());
+    if (animation == "Solid Color") SetColorValue(configJson["Animations"]["parameters"]["SolidColor"]["Color"][0].as<int>(),configJson["Animations"]["parameters"]["SolidColor"]["Color"][1].as<int>(),configJson["Animations"]["parameters"]["SolidColor"]["Color"][2].as<int>(),configJson["Animations"]["parameters"]["SolidColor"]["Brightness"].as<float>());
     else if (animation == "Color Cycle")
     {
         startBool[0] = true; startBool[1] = true; startBool[2] = true;
@@ -1227,7 +1227,7 @@ void setAnimationParameters(JsonObject &parameters){
     if (parameters.containsKey("SolidColor"))
     {        
       JsonObject _SolidColor = parameters["SolidColor"];
-      if (_SolidColor.containsKey("Brightness")) configParam["SolidColor"]["Brightness"] = _SolidColor["Brightness"];   
+      if (_SolidColor.containsKey("Brightness")) configParam["SolidColor"]["Brightness"] = _SolidColor["Brightness"].as<float>();   
       if(_SolidColor.containsKey("Color")) {
         configParam["SolidColor"]["Color"][0] = _SolidColor["Color"][0].as<int>();
         configParam["SolidColor"]["Color"][1] = _SolidColor["Color"][1].as<int>();
@@ -1237,7 +1237,7 @@ void setAnimationParameters(JsonObject &parameters){
     if (parameters.containsKey("ColorCycle"))
     {
       JsonObject _ColorCycle = parameters["ColorCycle"];
-      if(_ColorCycle.containsKey("ColorCycleSpeed")) configParam["ColorCycle"]["ColorCycleSpeed"] = _ColorCycle["ColorCycleSpeed"];  
+      if(_ColorCycle.containsKey("ColorCycleSpeed")) configParam["ColorCycle"]["ColorCycleSpeed"] = _ColorCycle["ColorCycleSpeed"].as<int>();  
     }
     
     if (parameters.containsKey("Breathing"))

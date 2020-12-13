@@ -10,5 +10,8 @@ https://github.com/Links2004/arduinoWebSockets
 ArduinoJson
 https://github.com/bblanchon/ArduinoJson
 
+NTPClient
+https://github.com/arduino-libraries/NTPClient
+
 SchedulerESP8266
 https://github.com/limiteddata/SchedulerESP8266
