@@ -4,7 +4,7 @@
 <img align="center" src="./assets/esprgb_banner.svg" width=400 />
 
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; **ESPRGB** is a open-source platform that provides you with the easiest way to upgrade your rgb led strip to a fully-featured and customizable wifi rgb controller for cheap.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; **ESPRGB** is a open-source way to upgrade your rgb led strip to a fully-featured and customizable wifi rgb controller for cheap.
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; This should be the easiest way to make a diy rgb controller and finally get rid of all the cheap remotes.
 Using a esp8266 board, some mosfets a linear regulator (or buck converter) using the power of ESPRGB to your advantage to have a seamless experience using your led strips.
