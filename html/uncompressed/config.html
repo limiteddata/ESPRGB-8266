@@ -1,0 +1,166 @@
+<html>
+<head>
+  <title>ESP | Config</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+        *{box-sizing: inherit;font-family: Montserrat, sans-serif; font-weight: 400}
+        .btn{ color: #fff; background: #06d79c; border: 1px solid #06d79c; cursor: pointer; width:230px; height: 25px; border-radius:4px; padding:4px; margin:15px auto; display:block;}
+        .select-editable {position:relative; background-color: white; display:block; border-radius:4px; width:230px; height:25px; padding:4px; margin:15px auto;}
+        .select-editable select { position:absolute; top:0px; left:0px; border-radius:4px; width:230px; height:25px; padding:4px;margin:0; }
+        .select-editable input { position:absolute; top:4px; left:4px; width:217px; height:25px;  border:none; }
+        .select-editable select:focus, .select-editable input:focus { outline:none;  height:25px; }
+        .inputStyle { width:230px; height: 25px; display:block; border-radius:4px; padding:4px; margin:15px auto;}
+    </style>
+</head>
+<body style="background: #152036;">
+      <h1 style="text-align:center; margin-top: 30px; color: #fff;">ESP Config</h1>
+          <div style="background:#1b2a47; width: 270px;padding:25px; margin:0 auto; border-radius:15px;">
+            <form method="post" id="postForm" onsubmit="saveConfig();return false;">
+                <h4 style="text-align:center; color: #fff;">Wifi credentials</h4>
+                <input id="SSID" oninput="passwordBehaviour(this)" class="inputStyle" type="text" placeholder="SSID" name="product" list="ssidList" required="">
+                <datalist id="ssidList"></datalist>
+                <input class="inputStyle" id="PASSWORD" placeholder="PASSWORD" name="PASSWORD" type="password" required="">
+                <h4 style="text-align:center; color: #fff;">Device details</h4>
+                <div>
+                  <p style="display:inline-block; color:white; margin-left:15px;">esprgb-</p>
+                  <input class="inputStyle" id="HOSTNAME" placeholder="HOSTNAME" name="HOSTNAME" type="text" style="display:inline-block; width:170px" required="">
+                </div>
+                <h4 style="text-align:center; color: #fff;">Device pinout</h4>
+                <div style="color: #fff; font-size:12pt;">
+                  <label style="display: inline-block; margin-left:15px;width:80px;" for="pins">Red pin:</label>
+                  <select class="inputStyle" style="display:inline-block;width:75px; height:20px; margin:5 auto;" id="REDPIN" name="REDPIN" onchange="disableOption()" required="">
+                    <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option>
+                    <option value="12">12</option><option value="13">13</option><option value="14">14</option><option value="15">15</option><option value="16">16</option>
+                  </select>
+                  <button style="display: inline-block; width:60px; height:20px; font-size:9pt; margin:5 auto; " class="btn" onclick="testPin(document.getElementById('REDPIN').value)" type="button">TEST</button>
+                </div>
+                <div style="color: #fff; font-size:12pt;">
+                  <label style="display: inline-block; margin-left:15px; width:80px;" for="pins">Green pin:</label>
+                  <select class="inputStyle" style="display:inline-block;width:75px; height:20px; margin:5 auto;" id="GREENPIN" name="GREENPIN" onchange="disableOption()" required="">
+                    <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option>
+                    <option value="12">12</option><option value="13">13</option><option value="14">14</option><option value="15">15</option><option value="16">16</option>
+                  </select>
+                  <button style="display: inline-block; width:60px; height:20px; font-size:9pt; margin:5 auto;" class="btn" onclick="testPin(document.getElementById('GREENPIN').value)" type="button">TEST</button>
+                </div>
+                <div style="color: #fff; font-size:12pt;">
+                  <label style="display: inline-block; margin-left:15px; width:80px;" for="pins">Blue pin:</label>
+                  <select class="inputStyle" style="display:inline-block;width:75px; height:20px; margin:5 auto;" id="BLUEPIN" name="BLUEPIN" onchange="disableOption()" required="">
+                    <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option>
+                    <option value="12">12</option><option value="13">13</option><option value="14">14</option><option value="15">15</option>
+                  </select>
+                  <button style="display: inline-block; width:60px; height:20px; font-size:9pt; margin:5 auto;" class="btn" onclick="testPin(document.getElementById('BLUEPIN').value)" type="button">TEST</button>
+                </div>
+                <div style="color: #fff; font-size:12pt;">
+                  <label style="display: inline-block; margin-left:15px; width:80px; font-size:11pt;" for="pins">Buzzer pin:</label>
+                  <select class="inputStyle" style="display:inline-block;width:75px; height:20px; margin:5 auto;" id="BUZZERPIN" name="BUZZERPIN" onchange="disableOption()" required="">
+                    <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option>
+                    <option value="12">12</option><option value="13">13</option><option value="14">14</option><option value="15">15</option><option value="16">16</option>
+                  </select>
+                  <button style="display: inline-block; width:60px; height:20px; font-size:9pt; margin:5 auto;" class="btn" onclick="testPin(document.getElementById('BUZZERPIN').value)" type="button">TEST</button>
+                </div>
+                <h4 style="text-align:center; color: #fff; margin:2px;" id="pinResponse"></h4>
+                <h4 style="text-align:center; color: #fff; display:inline-block; margin-left:15px;">Static ipaddress (optional)</h4> <input onchange="staticToggle(this.checked)" style="border-radius:4px" id="startStatic" name="startStatic" type="checkbox">
+                <input class="inputStyle" id="local_IP" placeholder="IPAddress ex. 192.168.1.50" name="local_IP" type="text" disabled="" required="">
+                <input class="inputStyle" id="gateway" placeholder="Gateway ex. 192.168.1.1" name="gateway" type="text" disabled="" required="">
+                <input class="inputStyle" id="subnet" placeholder="subnet ex. 255.255.255.0" name="subnet" type="text" disabled="" required="">
+                <input class="inputStyle" id="dns" placeholder="dns ex 8.8.8.8" name="dns" type="text" disabled="" required="">
+                <button style="width:230px" class="btn" type="submit">Send</button>
+                </form>
+          </div>
+  <script>
+    function saveConfig() {
+      if(confirm("Are you sure you want to save this config?"))
+      {
+        var data ={"ESP_Config":{
+                  "HOSTNAME": "esprgb-"+document.getElementById("HOSTNAME").value,
+                  "SSID": document.getElementById("SSID").value,
+                  "PASSWORD":document.getElementById("PASSWORD").value,
+                  "REDPIN":parseInt(document.getElementById("REDPIN").value),
+                  "GREENPIN":parseInt(document.getElementById("GREENPIN").value),
+                  "BLUEPIN":parseInt(document.getElementById("BLUEPIN").value),
+                  "BUZZERPIN":parseInt(document.getElementById("BUZZERPIN").value)
+                },
+                "Network_Config":{
+                  "startStatic":document.getElementById("startStatic").checked,
+                  "local_IP":document.getElementById("local_IP").value,
+                  "gateway":document.getElementById("gateway").value,
+                  "subnet":document.getElementById("subnet").value,
+                  "dns":document.getElementById("dns").value
+                }
+              };
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST","/sendConfig",true);
+        xhr.send(JSON.stringify(data));
+      }
+    }
+    function staticToggle(value){
+      document.getElementById("startStatic").checked = value;
+      document.getElementById("local_IP").disabled = !value;
+      document.getElementById("gateway").disabled = !value;
+      document.getElementById("subnet").disabled = !value;
+      document.getElementById("dns").disabled = !value;
+    }
+    function passwordBehaviour(e){
+      var psw = document.getElementById("PASSWORD");
+      psw.value = null;
+      var option = document.querySelector("#ssidList option[value='"+e.value+"']");
+      if (option != null) {
+        if((option.innerHTML.split(',')[2].split(':')[1] == 'true')) psw.disabled = false;
+        else psw.disabled = true;
+      }
+    }
+    function disableOption() {
+      var a = [document.getElementById("REDPIN"),document.getElementById("GREENPIN"),document.getElementById("BLUEPIN"),document.getElementById("BUZZERPIN")];
+      var usedValues = [a[0].selectedIndex,a[1].selectedIndex,a[2].selectedIndex,a[3].selectedIndex];
+      for (var i = 0; i < a.length; i++) {
+          for (var j = 0; j < a[i].options.length; j++) a[i].options[j].disabled = false;
+          for (var j = 0; j < usedValues.length; j++) a[i].options[usedValues[j]].disabled = true;
+      }
+    }
+     function testPin(e){
+         var xhr = new XMLHttpRequest();
+         xhr.open("POST","/pinTester",true);
+         xhr.send(e);
+         xhr.onload=function(){document.getElementById("pinResponse").innerText = xhr.responseText;}
+     }
+     
+     window.addEventListener('load', function () {
+       var configData=new XMLHttpRequest();
+       configData.open("GET",'/returnConfigData',true);
+       configData.send();
+       configData.onload=function(){
+            data=JSON.parse(configData.responseText);
+            if(data.Initialized){
+              document.getElementById("SSID").value = data.SSID;
+              document.getElementById("PASSWORD").value = data.PASSWORD;
+              document.getElementById("HOSTNAME").value = data.HOSTNAME.split('-')[1];
+              document.getElementById("REDPIN").value = data.REDPIN;
+              document.getElementById("GREENPIN").value = data.GREENPIN;
+              document.getElementById("BLUEPIN").value = data.BLUEPIN;
+              document.getElementById("BUZZERPIN").value = data.BUZZERPIN;
+              staticToggle(data.startStatic);
+              document.getElementById("local_IP").value = data.local_IP;
+              document.getElementById("gateway").value = data.gateway;
+              document.getElementById("subnet").value = data.subnet;
+              document.getElementById("dns").value = data.dns;
+              if(data.PASSWORD == "") document.getElementById("PASSWORD").disabled = true;
+            }
+            disableOption();
+          }
+          var wifiData=new XMLHttpRequest();
+          wifiData.open("GET",'/getWifi',true);
+          wifiData.send();
+          wifiData.onload=function(){
+            data=JSON.parse(wifiData.responseText);
+            for(network in data.networks) {
+                var node = document.createElement("OPTION");
+                node.value = data.networks[network][0];
+                var textnode = document.createTextNode(data.networks[network][0] +", Strength:"+ data.networks[network][1]+"dBm, Secured:"+ data.networks[network][2]);
+                node.appendChild(textnode);
+                document.getElementById("ssidList").appendChild(node);
+            }
+          }
+        })
+  </script>
+</body>
+</html>
