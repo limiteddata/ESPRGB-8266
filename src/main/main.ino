@@ -9,12 +9,13 @@
 #include <SchedulerESP8266.h>
 #include "../html/compressed/config.html.h"
 #include "../html/compressed/index.html.h"
-#define ESPRGB_VERSION "1.1.1.0"
+#define ESPRGB_VERSION "1.1.0.3"
 #define reset_pin 16
 
 Scheduler scheduler;
 WebSocketsServer webSocket = WebSocketsServer(81); 
 ESP8266WebServer server(80); 
+
 
 bool startSaving = false;
 unsigned long currentMillis = millis();;

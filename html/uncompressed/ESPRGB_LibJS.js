@@ -664,10 +664,10 @@
         /**
          * Merges two json objects together
          */
-        #merge(obj1,obj2){
+        merge(obj1,obj2){
             for (var p in obj2) {
                 try {
-                if ( obj2[p].constructor==Object ) obj1[p] = this.#merge(obj1[p], obj2[p]);
+                if ( obj2[p].constructor==Object ) obj1[p] = this.merge(obj1[p], obj2[p]);
                 else obj1[p] = obj2[p];
                 } catch(e) {
                 obj1[p] = obj2[p];
@@ -703,7 +703,7 @@
         setAnimation(animation,parameters=null){
             if(this.CheckIfConnected()) return;
             var anim ={"Animations":{"playingAnimation" : animation }};
-            if(parameters!=null) anim = this.#merge(anim,parameters);
+            if(parameters!=null) anim = this.merge(anim,parameters);
             this.WebSocket.send(JSON.stringify(anim));
         }
         /**
